@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import LoginPage from '../pages/login.page'
 
-test.describe('Kanban board testing', () => {
+test.describe('Authentication', () => {
   const userData = {
     username: 'username',
     password: 'password',
