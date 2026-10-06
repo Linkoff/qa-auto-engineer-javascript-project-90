@@ -4,7 +4,6 @@ export default class UsersPage {
     this.page = page
 
     // Список пользователей
-    this.usersMenuItem = page.getByRole('menuitem', { name: 'Users' })
     this.createButton = page.getByRole('link', { name: 'Create' })
     this.selectAllCheckbox = page.getByRole('checkbox', { name: 'Select all' })
     this.selectedCountText = page.getByText(/[1-9]\d* items selected/)
@@ -53,7 +52,8 @@ export default class UsersPage {
   // затем меняем поля и сохраняем
   async editUser(searchEmail, { newEmail, firstName, lastName }) {
     await this.getUserRow(searchEmail).click()
-    // Ждем, что форма загрузила имя и фамилию (не пустые)
+    // Ждем, что форма загрузила email, имя и фамилию (не пустые)
+    await expect(this.emailInput).not.toHaveValue('')
     await expect(this.firstNameInput).not.toHaveValue('')
     await expect(this.lastNameInput).not.toHaveValue('')
     if (newEmail) await this.emailInput.fill(newEmail)

@@ -117,8 +117,8 @@ test.describe.serial('Users', () => {
   test('bulk deletes all users', async () => {
     await usersPage.selectAll()
     await expect(usersPage.selectedCountText).toBeVisible()
-    await usersPage.bulkDelete()
     await expect(usersPage.selectAllCheckbox).toBeChecked()
+    await usersPage.bulkDelete()
     await expect(usersPage.noUsersMessage).toBeVisible()
   })
 })
