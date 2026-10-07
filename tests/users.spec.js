@@ -9,7 +9,7 @@ const userData = {
 
 // serial - тесты идут по очереди, чтобы не мешали друг другу,
 // особенно последний тест с массовым удалением
-test.describe.serial('Users', () => {
+test.describe('Users', () => {
   let loginPage
   let usersPage
 

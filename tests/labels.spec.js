@@ -9,7 +9,7 @@ const userData = {
 
 // serial - тесты идут по очереди, чтобы не мешали друг другу,
 // особенно последний тест с массовым удалением
-test.describe.serial('Labels', () => {
+test.describe('Labels', () => {
   let loginPage
   let labelsPage
 
@@ -30,7 +30,7 @@ test.describe.serial('Labels', () => {
   // 2. Создание новой метки
   test('creates new labels', async () => {
     const newLabels = {
-      name: `created-${Date.now()}`, // уникальный name
+      name: `created-${Date.now()}`,
     }
     await labelsPage.createLabel(newLabels)
     await expect(labelsPage.getLabelRow(newLabels.name)).toBeVisible()

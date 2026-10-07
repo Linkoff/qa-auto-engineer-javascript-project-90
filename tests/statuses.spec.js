@@ -9,7 +9,7 @@ const userData = {
 
 // serial - тесты идут по очереди, чтобы не мешали друг другу,
 // особенно последний тест с массовым удалением
-test.describe.serial('Statuses', () => {
+test.describe('Statuses', () => {
   let loginPage
   let statusesPage
 
@@ -31,7 +31,7 @@ test.describe.serial('Statuses', () => {
   // 2. Создание нового статуса
   test('creates new status', async () => {
     const newStatus = {
-      name: `created-${Date.now()}`, // уникальный name
+      name: `created-${Date.now()}`,
       slug: `Created-${Date.now()}-slug`,
     }
     await statusesPage.createStatus(newStatus)
