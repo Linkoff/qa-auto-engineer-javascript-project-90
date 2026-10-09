@@ -7,8 +7,6 @@ const userData = {
   password: 'password',
 }
 
-// serial - тесты идут по очереди, чтобы не мешали друг другу,
-// особенно последний тест с массовым удалением
 test.describe('Statuses', () => {
   let loginPage
   let statusesPage
