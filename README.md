@@ -1,20 +1,24 @@
-# Тестирование Канбан-доски (JS)
+# E2E-тестирование Канбан-доски
 
 [![hexlet-check](https://github.com/Linkoff/qa-auto-engineer-javascript-project-90/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Linkoff/qa-auto-engineer-javascript-project-90/actions)
 
-Автоматизированное тестирование веб-приложения "Канбан-доска" с помощью JavaScript и Playwright.
-
-Учебный проект Хекслета: https://ru.hexlet.io/programs/qa-auto-engineer-javascript
+Автоматизированный фреймворк для сквозного тестирования веб-приложения "Канбан-доска" (учебный проект Хекслет).
 
 ## Стек
 
-- JavaScript
-- Playwright
+**Тестирование:**
+
+- Playwright (JavaScript)
+- Page Object Model
+- GitHub Actions
+
+**Приложение:**
+
 - React
 - Vite
 - ESLint
 
-## Что тестируется
+## Что покрыто тестами
 
 Автоматизированные тесты проверяют основные сценарии работы приложения:
 
@@ -74,3 +78,8 @@ npm run dev
 ```
 
 После запуска Vite откройте адрес, указанный в терминале. По умолчанию в конфигурации Playwright используется http://localhost:5173.
+
+## Ссылки
+
+[Курс Хекслет "Автоматизатор тестирования на JavaScript"](https://ru.hexlet.io/programs/qa-auto-engineer-javascript)
+[Документация Playwright](https://playwright.dev/)
