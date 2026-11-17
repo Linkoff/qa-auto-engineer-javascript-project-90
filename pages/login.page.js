@@ -6,6 +6,21 @@ export default class LoginPage {
     this.signInButton = page.getByRole('button', { name: 'Sign in' })
     this.profileButton = page.getByRole('button', { name: 'Profile' })
     this.logoutMenuItem = page.getByRole('menuitem', { name: 'Logout' })
+
+    // Ошибки валидации
+    this.usernameError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.usernameInput,
+      })
+      .getByText('Required')
+
+    this.passwordError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.passwordInput,
+      })
+      .getByText('Required')
   }
   async goto() {
     await this.page.goto('/')

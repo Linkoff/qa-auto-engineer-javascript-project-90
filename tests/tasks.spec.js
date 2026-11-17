@@ -209,4 +209,75 @@ test.describe('Tasks', () => {
     await tasksPage.deleteTask(task.title)
     await expect(tasksPage.getTaskCard(task.title)).not.toBeVisible()
   })
+  // 10. Создание задачи с пустыми обязательными полями
+  test('shows error for empty assignee field', async () => {
+    const timestamp = Date.now()
+    const taskTitle = `Task-${timestamp}`
+
+    await tasksPage.createButton.click()
+
+    await tasksPage.titleInput.fill(taskTitle)
+    await tasksPage.statusSelect.click()
+    await tasksPage.page.getByRole('option', { name: 'Draft' }).click()
+
+    await tasksPage.saveButton.click()
+
+    await expect(tasksPage.assigneeError).toBeVisible()
+    await expect(tasksPage.titleInput).toBeVisible()
+
+    await tasksPage.goto()
+    await expect(tasksPage.getTaskCard(taskTitle)).not.toBeVisible()
+  })
+  test('shows error for empty title field', async () => {
+    await tasksPage.createButton.click()
+
+    await tasksPage.assigneeSelect.click()
+    await tasksPage.page.getByRole('option', { name: SEED_USER_EMAIL }).click()
+
+    await tasksPage.statusSelect.click()
+    await tasksPage.page.getByRole('option', { name: 'Draft' }).click()
+
+    await tasksPage.saveButton.click()
+
+    await expect(tasksPage.titleError).toBeVisible()
+    await expect(tasksPage.assigneeSelect).toBeVisible()
+  })
+  test('shows error for empty status field', async () => {
+    const timestamp = Date.now()
+    const taskTitle = `Task-${timestamp}`
+
+    await tasksPage.createButton.click()
+
+    await tasksPage.assigneeSelect.click()
+    await tasksPage.page.getByRole('option', { name: SEED_USER_EMAIL }).click()
+
+    await tasksPage.titleInput.fill(taskTitle)
+
+    await tasksPage.saveButton.click()
+
+    await expect(tasksPage.statusError).toBeVisible()
+    await expect(tasksPage.titleInput).toBeVisible()
+
+    await tasksPage.goto()
+    await expect(tasksPage.getTaskCard(taskTitle)).not.toBeVisible()
+  })
+  // 11. Отмена удаления
+  test('cancels task deletion via Undo button', async () => {
+    const timestamp = Date.now()
+
+    const newTask = {
+      title: `Task-${timestamp}`,
+      content: `Description for task ${timestamp}`,
+      assignee: SEED_USER_EMAIL,
+      status: 'Draft',
+      labels: ['bug', 'feature'],
+    }
+
+    await tasksPage.createTask(newTask)
+    await expect(tasksPage.getTaskCard(newTask.title)).toBeVisible()
+    await tasksPage.deleteTask(newTask.title)
+    await expect(tasksPage.undoButton).toBeVisible()
+    await tasksPage.undoButton.click()
+    await expect(tasksPage.getTaskCard(newTask.title)).toBeVisible()
+  })
 })

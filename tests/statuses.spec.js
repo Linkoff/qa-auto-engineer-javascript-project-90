@@ -89,4 +89,44 @@ test.describe('Statuses', () => {
     await statusesPage.bulkDelete()
     await expect(statusesPage.noStatusesMessage).toBeVisible()
   })
+
+  // 7. Создание статуса с пустыми обязательными полями
+  test('shows error for empty name field', async () => {
+    const timestamp = Date.now()
+    const statusSlug = `Status-${timestamp}`
+
+    await statusesPage.createButton.click()
+    await statusesPage.slugInput.fill(statusSlug)
+    await statusesPage.saveButton.click()
+
+    await expect(statusesPage.nameError).toBeVisible()
+    await expect(statusesPage.slugInput).toBeVisible()
+  })
+  test('shows error for empty slug field', async () => {
+    const timestamp = Date.now()
+    const statusName = `Status-${timestamp}`
+
+    await statusesPage.createButton.click()
+    await statusesPage.nameInput.fill(statusName)
+    await statusesPage.saveButton.click()
+
+    await expect(statusesPage.slugError).toBeVisible()
+    await expect(statusesPage.nameInput).toBeVisible()
+
+    await statusesPage.goto()
+    await expect(statusesPage.getStatusRow(statusName)).not.toBeVisible()
+  })
+  // 8. Отмена удаления
+  test('cancels status deletion via Undo button', async () => {
+    const newStatus = {
+      name: `created-${Date.now()}`,
+      slug: `Created-${Date.now()}-slug`,
+    }
+    await statusesPage.createStatus(newStatus)
+    await expect(statusesPage.getStatusRow(newStatus.name)).toBeVisible()
+    await statusesPage.deleteStatus(newStatus.name)
+    await expect(statusesPage.undoButton).toBeVisible()
+    await statusesPage.undoButton.click()
+    await expect(statusesPage.getStatusRow(newStatus.name)).toBeVisible()
+  })
 })

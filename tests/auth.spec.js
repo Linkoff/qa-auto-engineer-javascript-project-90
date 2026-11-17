@@ -28,4 +28,14 @@ test.describe('Authentication', () => {
     await loginPage.logout()
     await expect(loginPage.signInButton).toBeVisible()
   })
+  test('shows error for empty username field', async () => {
+    await loginPage.login('', userData.password)
+    await expect(loginPage.usernameError).toBeVisible()
+    await expect(loginPage.profileButton).not.toBeVisible()
+  })
+  test('shows error for empty password field', async () => {
+    await loginPage.login(userData.username, '')
+    await expect(loginPage.passwordError).toBeVisible()
+    await expect(loginPage.profileButton).not.toBeVisible()
+  })
 })

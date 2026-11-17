@@ -14,6 +14,7 @@ export default class LabelsPage {
     this.nameInput = page.getByRole('textbox', { name: 'Name' })
     this.saveButton = page.getByRole('button', { name: 'Save' })
     this.deleteButton = page.getByRole('button', { name: 'Delete' })
+    this.undoButton = page.getByRole('button', { name: 'Undo' })
   }
 
   // Переход в раздел Labels

@@ -119,4 +119,19 @@ test.describe('Users', () => {
     await usersPage.bulkDelete()
     await expect(usersPage.noUsersMessage).toBeVisible()
   })
+
+  // 9 Отмена удаления
+  test('cancels user deletion via Undo button', async () => {
+    const newUser = {
+      email: `delete-${Date.now()}@example.com`,
+      firstName: 'To',
+      lastName: 'Delete',
+    }
+    await usersPage.createUser(newUser)
+    await expect(usersPage.getUserRow(newUser.email)).toBeVisible()
+    await usersPage.deleteUser(newUser.email)
+    await expect(usersPage.undoButton).toBeVisible()
+    await usersPage.undoButton.click()
+    await expect(usersPage.getUserRow(newUser.email)).toBeVisible()
+  })
 })

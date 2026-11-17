@@ -80,4 +80,21 @@ test.describe('Labels', () => {
     await labelsPage.bulkDelete()
     await expect(labelsPage.noLabelsMessage).toBeVisible()
   })
+  // 7. Сохранение метки с пустым названием
+  test('save button is disabled when label name is empty', async () => {
+    await labelsPage.createButton.click()
+    await expect(labelsPage.saveButton).toBeDisabled()
+  })
+  // 8. Отмена удаления
+  test('cancels label deletion via Undo button', async () => {
+    const newLabel = {
+      name: `created-${Date.now()}`,
+    }
+    await labelsPage.createLabel(newLabel)
+    await expect(labelsPage.getLabelRow(newLabel.name)).toBeVisible()
+    await labelsPage.deleteLabel(newLabel.name)
+    await expect(labelsPage.undoButton).toBeVisible()
+    await labelsPage.undoButton.click()
+    await expect(labelsPage.getLabelRow(newLabel.name)).toBeVisible()
+  })
 })

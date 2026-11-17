@@ -22,6 +22,7 @@ export default class UsersPage {
     this.lastNameInput = page.getByRole('textbox', { name: 'Last name' })
     this.saveButton = page.getByRole('button', { name: 'Save' })
     this.deleteButton = page.getByRole('button', { name: 'Delete' })
+    this.undoButton = page.getByRole('button', { name: 'Undo' })
 
     // Ошибки валидации
     this.emailError = page.getByText('Incorrect email format')

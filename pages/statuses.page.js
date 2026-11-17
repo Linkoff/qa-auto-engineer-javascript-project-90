@@ -16,6 +16,22 @@ export default class StatusesPage {
     this.slugInput = page.getByRole('textbox', { name: 'Slug' })
     this.saveButton = page.getByRole('button', { name: 'Save' })
     this.deleteButton = page.getByRole('button', { name: 'Delete' })
+    this.undoButton = page.getByRole('button', { name: 'Undo' })
+
+    // Ошибки валидации
+    this.nameError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.nameInput,
+      })
+      .getByText('Required')
+
+    this.slugError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.slugInput,
+      })
+      .getByText('Required')
   }
 
   // Переход в раздел Task statuses

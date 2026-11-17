@@ -13,11 +13,34 @@ export default class TasksPage {
     this.labelSelect = page.getByRole('combobox', { name: 'Label' })
     this.saveButton = page.getByRole('button', { name: 'Save' })
     this.deleteButton = page.getByRole('button', { name: 'Delete' })
+    this.undoButton = page.getByRole('button', { name: 'Undo' })
 
     // Фильтры
     this.assigneeFilter = page.locator('[data-source="assignee_id"]')
     this.statusFilter = page.locator('[data-source="status_id"]')
     this.labelFilter = page.locator('[data-source="label_id"]')
+
+    // Ошибки валидации
+    this.assigneeError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.assigneeSelect,
+      })
+      .getByText('Required')
+
+    this.titleError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.titleInput,
+      })
+      .getByText('Required')
+
+    this.statusError = page
+      .locator('.MuiFormControl-root')
+      .filter({
+        has: this.statusSelect,
+      })
+      .getByText('Required')
   }
 
   // Переход в раздел Tasks
