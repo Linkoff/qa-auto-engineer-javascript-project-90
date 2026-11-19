@@ -125,7 +125,8 @@ export default class TasksPage {
   async deleteTask(title) {
     await this.getTaskCard(title).getByRole('link', { name: 'Edit' }).click()
     await this.deleteButton.click()
-    await this.page.waitForURL(/#\/tasks/)
+    await this.page.waitForURL(/#\/tasks$/)
+    await expect(this.createButton).toBeVisible() // доска отрендерилась
   }
 
   // Перемещение задачи в другой статус

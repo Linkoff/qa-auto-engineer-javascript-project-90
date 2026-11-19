@@ -57,6 +57,8 @@ export default class LabelsPage {
   async deleteLabel(name) {
     await this.getLabelRow(name).click()
     await this.deleteButton.click()
+    await this.page.waitForURL(/#\/labels$/)
+    await expect(this.nameColumnHeader).toBeVisible() // таблица на месте
   }
 
   // Массовое удаление: выбрать все и нажать Delete в bulk toolbar

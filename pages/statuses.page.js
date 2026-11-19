@@ -70,6 +70,8 @@ export default class StatusesPage {
   async deleteStatus(name) {
     await this.getStatusRow(name).click()
     await this.deleteButton.click()
+    await this.page.waitForURL(/#\/task_statuses$/)
+    await expect(this.nameColumnHeader).toBeVisible() // таблица на месте
   }
 
   // Массовое удаление: выбрать всех и нажать Delete в bulk toolbar

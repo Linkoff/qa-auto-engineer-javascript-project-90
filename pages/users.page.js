@@ -67,6 +67,8 @@ export default class UsersPage {
   async deleteUser(email) {
     await this.getUserRow(email).click()
     await this.deleteButton.click()
+    await this.page.waitForURL(/#\/users$/)
+    await expect(this.emailColumnHeader).toBeVisible() // таблица на месте
   }
 
   // Массовое удаление: выбрать всех и нажать Delete в bulk toolbar
